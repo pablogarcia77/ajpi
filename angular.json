@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["quill-emoji"],
             "outputPath": "dist/ajpi",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -24,6 +25,8 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/css/ajpi-theme.css",
+              "src/assets/css/simple-grid.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -87,9 +90,16 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/css/ajpi-theme.css",
+              "src/assets/css/simple-grid.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/html2canvas/dist/html2canvas.min.js",
+              "node_modules/jspdf/dist/jspdf.es.min.js",
+              "node_modules/quill/dist/quill.min.js",
+              "node_modules/quill-image-resize-module/image-resize.min.js"
+            ]
           }
         },
         "lint": {

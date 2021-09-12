@@ -1,0 +1,18 @@
+.footer-image{
+    height: 250px;
+}
+.social-media{
+    background-color: #8e2d34;
+}
+ul{
+    list-style: none;
+}
+.img-footer{
+    height: 100px;
+}
+.link-hover:hover{
+    color:#711c21;
+}
+.credits{
+    background-color: #711c21;
+}

@@ -1,0 +1,14 @@
+mat-card-header{
+    background-color: #8e2d34;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px
+}
+h3{
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #b1b1b1;
+    margin-bottom: -10px;
+}

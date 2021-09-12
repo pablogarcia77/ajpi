@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.borde{
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin-bottom: 20px;
+}
+.w-100{
+    width: 100%;
+}
+.primary-text{
+    color: #8e2d34;
+}
+.gray-text{
+    color: #6c757d !important;
+    font-size: 0.9rem;
+}
+.white-text{
+    color: white;
+    text-decoration: none;
+}
+.icon{
+    margin-right: 7px;
+}
+.bold{
+    font-weight: 600;
+}
+table {
+    width: 100%;
+}
+.pointer{
+    cursor: pointer;
+}
+.mt-50{
+    margin-top: 50px;
+}
+.right{
+    float: right;
+}
+.px-20{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.mb-0{
+    margin-bottom: 0 !important;
+}
+.mb-50{
+    margin-bottom: 50px !important;
+}
+.mb-10{
+    margin-bottom: 10px !important;
+}

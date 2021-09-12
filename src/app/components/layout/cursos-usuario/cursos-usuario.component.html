@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row">
+        <h1>Mis Cursos</h1>
+    </div>
+    <div class="row">
+        <div *ngFor="let curso of cursos">
+            <div class="col-12">
+                <mat-card *ngIf="curso.habilita_certificado">
+                    <mat-card-header>
+                      <mat-card-title>{{curso.curso}}</mat-card-title>
+                      <mat-card-subtitle>Fecha de inscripcion: {{curso.fecha | date: 'dd/MM/YYY'}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-actions>
+                      <div class="row">
+                        <button mat-raised-button color="primary" class="right" (click)="verCertificado(curso)">Ver Certificado</button>
+                      </div>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

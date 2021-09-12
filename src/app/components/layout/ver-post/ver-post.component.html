@@ -1,0 +1,16 @@
+<div class="borde">
+    <div class="container-fluid mt-50 px-20">
+        <div class="row">
+            <h1 class="mat-display-2 mb-0">{{publicacion.titulo}}</h1>
+            <small class="gray-text">Fecha: {{publicacion.fecha | date: 'dd/MM/YYY'}}</small>
+        </div>
+        <div class="row">
+            <div class="col-12 image-container">
+                <img [src]="publicacion.url_imagen" [alt]="publicacion.titulo" class="imagen-post">
+            </div>
+            <div class="col-12">
+                <quill-view-html [content]="publicacion.contenido"></quill-view-html>
+            </div>
+        </div>
+    </div>
+</div>

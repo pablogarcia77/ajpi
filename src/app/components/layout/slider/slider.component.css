@@ -1,0 +1,15 @@
+.slide-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+}
+.img-carousel{
+    height: 100%;
+    width: auto;
+    box-shadow: 1px -1px 28px 15px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 1px -1px 28px 15px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px -1px 28px 15px rgba(0,0,0,0.75);
+}

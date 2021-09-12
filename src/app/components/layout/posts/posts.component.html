@@ -1,0 +1,16 @@
+<div class="row">
+    <h1 class="mat-display-2">Últimas Novedades</h1>
+</div>
+<div *ngFor="let publicacion of obs | async">
+    <div *ngIf="publicacion.estado" class="row borde">
+        <div class="col-2 image-container" [routerLink]="['ver-publicacion',publicacion.id]">
+            <img [src]="publicacion.url_imagen" [alt]="publicacion.titulo" class="image-post pointer">
+        </div>
+        <div class="col-9">
+            <h2 class="primary-text pointer" [routerLink]="['ver-publicacion',publicacion.id]">{{publicacion.titulo}}</h2>
+            <small>{{publicacion.fecha | date: 'dd/MM/YYYY'}}</small>
+            <p class="pointer gray-text" [routerLink]="['ver-publicacion',publicacion.id]">Ver más</p>
+        </div>
+    </div>
+</div>
+<mat-paginator [pageSizeOptions]="[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]"></mat-paginator>

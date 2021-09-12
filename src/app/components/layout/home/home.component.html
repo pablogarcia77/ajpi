@@ -1,0 +1,23 @@
+<header>
+    <app-header></app-header>
+</header>
+<section class="slider">
+    <app-slider></app-slider>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-9">
+            <mat-card class="shadow">
+                <router-outlet></router-outlet>
+            </mat-card>
+        </div>
+        <div class="col-3">
+            <mat-card class="shadow">
+                <app-login></app-login>
+            </mat-card>
+        </div>
+    </div>
+</section>
+<footer>
+    <app-footer></app-footer>
+</footer>

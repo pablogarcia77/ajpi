@@ -1,0 +1,8 @@
+<h1>Titulo de {{socio.nombre}} {{socio.apellido}}</h1>
+<mat-dialog-content>
+    <img [src]="socio.url_titulo" [alt]="socio.username" class="titulo">
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Cerrar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="lockSocio(socio)">Habilitar</button>
+</mat-dialog-actions>

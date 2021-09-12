@@ -1,0 +1,119 @@
+<div class="borde">
+    <div *ngIf="!usuario">
+        <div class="row">
+            <div class="col-12">
+                <h1>Login</h1>
+            </div>
+        </div>
+        <form [formGroup]="loginForm" (submit)="login()">
+            <div class="row">
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input matInput formControlName="username">
+                        <mat-error *ngIf="loginForm.controls.username.touched && loginForm.controls.username.invalid">
+                            <span *ngIf="loginForm.controls.username.errors?.required">Campo obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput formControlName="password" type="password" class="w-100">
+                        <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+                            <span *ngIf="loginForm.controls.password.errors?.required">Campo obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <h4 class="primary-text bold" *ngIf="error">Usuario o contraseña incorrecto</h4>
+                    <h4 class="primary-text bold" *ngIf="bloqueado">Usuario bloqueado, aguarda que el administrador te conceda acceso</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button mat-raised-button color="primary" class="w-100">Iniciar Sesión</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button mat-stroked-button class="w-100" color="primary" type="button" (click)="registro()">Registro</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a class="pointer primary-text" [routerLink]="['forgot-password']">¿Olvidaste tu contraseña?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="usuario">
+        <div class="row">
+            <div class="col-12">
+                <h1>Perfil</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="image-container" [ngClass]="{'blue-border':progress==0, 'white-border':progress>0}" (click)="fileInput.click()">
+                    <mat-progress-spinner
+                        [diameter]="200"
+                        [strokeWidth]="10"
+                        class="spinner"
+                        color="accent"
+                        mode="determinate"
+                        [value]="progress">
+                    </mat-progress-spinner>
+                    <img [src]="usuario.foto_perfil" [alt]="usuario.username" class="image" *ngIf="!foto">
+                    <img mat-card-image [src]="foto" alt="asd" class="image" *ngIf="foto">
+                    <input hidden type="file" #fileInput mat-raised-button accept="image/*" (change)="readThis($event)">
+                    <div class="content">
+                        <mat-icon class="icon">camera_alt</mat-icon>
+                        <span class="text">Cambiar Foto</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <h2 class="primary-text">{{usuario.username}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="pointer primary-text" [routerLink]="['profile',usuario.username]">
+                    <mat-icon class="icon">person</mat-icon>
+                    <span>Mi Perfil</span>
+                </h3>
+                <!-- Admin Panel -->
+                <h3 class="pointer primary-text" [routerLink]="['publicaciones']" *ngIf="usuario.admin == 1">
+                    <mat-icon class="icon">library_books</mat-icon>
+                    <span>Publicaciones</span>
+                </h3>
+                <h3 class="pointer primary-text" [routerLink]="['cursos']" *ngIf="usuario.admin == 1">
+                    <mat-icon class="icon">school</mat-icon>
+                    <span>Cursos</span>
+                </h3>
+                <h3 class="pointer primary-text" [routerLink]="['socios']" *ngIf="usuario.admin == 1">
+                    <mat-icon class="icon">supervisor_account</mat-icon>
+                    <span>Socios</span>
+                </h3>
+                <h3 class="pointer primary-text" [routerLink]="['slides']" *ngIf="usuario.admin == 1">
+                    <mat-icon class="icon">slideshow</mat-icon>
+                    <span>Slides</span>
+                </h3>
+                <!-- Panel de Usuario Comun -->
+                <h3 class="pointer primary-text" [routerLink]="['cursos',usuario.username]" *ngIf="usuario.admin == 0">
+                    <mat-icon class="icon">school</mat-icon>
+                    <span>Mis Cursos</span>
+                </h3>
+                <h3 class="pointer primary-text" [routerLink]="['estado',usuario.username]" *ngIf="usuario.admin == 0">
+                    <mat-icon class="icon">card_membership</mat-icon>
+                    <span>Estado de Cuota</span>
+                </h3>
+                <h3 class="pointer primary-text" (click)="logout()">
+                    <mat-icon class="icon">logout</mat-icon>
+                    <span>Salir</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>

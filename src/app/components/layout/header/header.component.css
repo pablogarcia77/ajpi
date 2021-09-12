@@ -1,0 +1,13 @@
+.liston {
+    /* position: absolute; */
+    z-index: 1;
+    margin-top: 40px;
+    height: 150px;
+    margin-right: 10px;
+}
+.right-container{
+    display: flex;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

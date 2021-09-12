@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Reporte de Socios</h2>
+<mat-dialog-content>
+    <div>
+        <table id="htmlData" #htmlData>
+            <thead>
+                <th>Apellido</th>
+                <th>Nombre</th>
+                <th *ngFor="let periodo of periodos">{{ periodo.periodo }}</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let socio of cuotaSocios">
+                    <td>{{ socio.apellido }}</td>
+                    <td>{{ socio.nombre }}</td>
+                    <td *ngFor="let p of periodos" class="center">
+                        <span *ngFor="let c of socio.periodos; let index">
+                            <span *ngIf="c == p.periodo" [ngClass]="{'pago': c == p.periodo}">Pago</span>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" (click)="generateReport()" cdkFocusInitial>Descargar PDF</button>
+  </mat-dialog-actions>

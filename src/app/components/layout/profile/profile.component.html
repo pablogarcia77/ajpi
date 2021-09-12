@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <h1>Mi Perfil</h1>
+    </div>
+    <form [formGroup]="userForm">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username" readonly>
+                    <mat-error *ngIf="userForm.controls.username.touched && userForm.controls.username.invalid">
+                        <span *ngIf="userForm.controls.username.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Nuevo Password</mat-label>
+                    <input matInput formControlName="password" type="password" class="w-100">
+                    <mat-error *ngIf="userForm.controls.password.touched && userForm.controls.password.invalid">
+                        <span *ngIf="userForm.controls.password.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput formControlName="apellido">
+                    <mat-error *ngIf="userForm.controls.apellido.touched && userForm.controls.apellido.invalid">
+                        <span *ngIf="userForm.controls.apellido.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre">
+                    <mat-error *ngIf="userForm.controls.nombre.touched && userForm.controls.nombre.invalid">
+                        <span *ngIf="userForm.controls.nombre.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Dni</mat-label>
+                    <input matInput formControlName="dni">
+                    <mat-error *ngIf="userForm.controls.dni.touched && userForm.controls.dni.invalid">
+                        <span *ngIf="userForm.controls.dni.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="userForm.controls.email.touched && userForm.controls.email.invalid">
+                        <span *ngIf="userForm.controls.email.errors?.required">Campo obligatorio</span>
+                        <span *ngIf="userForm.controls.email.errors?.email">No es una dirección de email válida</span>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6"></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button mat-raised-button color="primary" class="w-100" type="submit" (click)="update()">Guardar Cambios</button>
+            </div>
+        </div>
+    </form>
+</div>

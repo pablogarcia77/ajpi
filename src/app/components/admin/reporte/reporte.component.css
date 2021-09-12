@@ -1,0 +1,13 @@
+th{
+    background-color: #8e2d34;
+    color: white;
+    font-weight: bold;
+}
+.pago{
+    color: green;
+    font-weight: bolder;
+}
+
+tr:nth-of-type(odd){
+    background-color: #e9e9e9;
+}

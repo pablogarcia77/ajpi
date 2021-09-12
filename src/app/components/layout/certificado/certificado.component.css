@@ -1,0 +1,46 @@
+.mat-card{
+    display: flex;
+    justify-content: center;
+}
+.liston{
+    height: 200px;
+}
+p{
+    font-weight: 600;
+}
+.mat-display-1{
+    font-weight: 700;
+}
+h6{
+    margin: 0 !important;
+}
+.qr{
+    width: 100%;
+    height: auto;
+}
+
+/* PDF */
+.contenedor{
+    width: 1200px;
+}
+.fila{
+    position: relative;
+    width: 1200px;
+}
+.fila [class^=colu]{float:left;margin:.5rem 0px}
+.colu-2{
+    width: 200px;
+}
+.colu-6{
+    width: 600px;
+}
+.colu-8{
+    width: 800px;
+}
+.colu-12{
+    width: 1200px;
+}
+
+.scroll{
+    overflow: scroll;
+}

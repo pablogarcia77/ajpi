@@ -1,0 +1,91 @@
+
+<form [formGroup]="registroForm" (submit)="registro()">
+    <div class="row">
+        <h1>Registro</h1>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username">
+                <mat-error *ngIf="registroForm.controls.username.touched && registroForm.controls.username.invalid">
+                    <span *ngIf="registroForm.controls.username.errors?.required">Campo obligatorio</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" type="password" class="w-100">
+                    <mat-error *ngIf="registroForm.controls.password.touched && registroForm.controls.password.invalid">
+                        <span *ngIf="registroForm.controls.password.errors?.required">Campo obligatorio</span>
+                    </mat-error>
+                </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input matInput formControlName="apellido" type="text" class="w-100"/>
+                <mat-error *ngIf="registroForm.controls.apellido.touched && registroForm.controls.apellido.invalid">
+                    <span *ngIf="registroForm.controls.apellido.errors?.required">Campo obligatorio</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombre" type="text" class="w-100"/>
+                <mat-error *ngIf="registroForm.controls.nombre.touched && registroForm.controls.nombre.invalid">
+                    <span *ngIf="registroForm.controls.nombre.errors?.required">Campo obligatorio</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="text" class="w-100"/>
+                <mat-error *ngIf="registroForm.controls.email.touched && registroForm.controls.email.invalid">
+                    <span *ngIf="registroForm.controls.email.errors?.required">Campo obligatorio</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <!-- <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Titulo</mat-label>
+                <input matInput formControlName="url_titulo" type="text" class="w-100"/>
+                <mat-error *ngIf="registroForm.controls.url_titulo.touched && registroForm.controls.url_titulo.invalid">
+                    <span *ngIf="registroForm.controls.url_titulo.errors?.required">Campo obligatorio</span>
+                </mat-error>
+            </mat-form-field> -->
+            <mat-label>Subir foto del Título</mat-label>
+            <button type="button" mat-stroked-button color="primary" class="w-100" (click)="titulo.click()">Subir Imagen</button>
+            <mat-progress-bar color="primary"
+            mode="determinate"
+            [value]="progress"></mat-progress-bar>
+            <input hidden type="file" #titulo mat-raised-button accept="image/*" (change)="readThis($event)">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Documento</mat-label>
+                <input matInput formControlName="dni" type="text" class="w-100"/>
+                <mat-error *ngIf="registroForm.controls.dni.touched && registroForm.controls.dni.invalid">
+                    <span *ngIf="registroForm.controls.dni.errors?.required">Campo obligatorio</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <button mat-raised-button type="submit" color="primary" class="w-100">Registrarme</button>
+        </div>
+        <div class="col-6">
+            <button mat-stroked-button type="button" color="primary" class="w-100" (click)="close()">Cancelar</button>
+        </div>
+    </div>
+</form>

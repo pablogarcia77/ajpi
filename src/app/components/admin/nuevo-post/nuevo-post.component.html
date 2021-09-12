@@ -1,0 +1,33 @@
+<div class="row mt-5">
+    <div class="col-10">
+        <h1 *ngIf="!editMode">Nueva Publicacion</h1>
+        <h1 *ngIf="editMode">Editar Publicacion</h1>
+    </div>
+</div>
+<div class="row">
+    <form [formGroup]="postForm" #form (submit)="publicarEditar()">
+        <div class="col-9">
+            <mat-form-field class="w-100" appearance="outline">
+                <mat-label>Titulo</mat-label>
+                <input matInput formControlName="titulo">
+                <mat-error *ngIf="postForm.controls.titulo.touched && postForm.controls.titulo.invalid">
+                    <span *ngIf="postForm.controls.titulo.errors?.required">Campo obligatorio</span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-3">
+            <mat-label>Imagen de Muestra</mat-label>
+            <button type="button" mat-raised-button color="primary" class="w-100" (click)="muestra.click()">Subir Imagen</button>
+            <mat-progress-bar color="primary"
+            mode="determinate"
+            [value]="progress"></mat-progress-bar>
+            <input hidden type="file" #muestra mat-raised-button accept="image/*" (change)="readThis($event)">
+        </div>
+        <div class="col-12">
+            <quill-editor formControlName="contenido" [styles]="{minHeight: '700px'}"></quill-editor>
+        </div>
+        <div class="col-12">
+            <button mat-raised-button color="primary" type="submit" class="right">Publicar</button>
+        </div>
+    </form>
+</div>

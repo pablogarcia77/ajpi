@@ -1,0 +1,55 @@
+<mat-dialog-content class="container-fluid">
+    <div id="htmlData">
+        <div class="center">
+            <div class="row mb-0">
+                <div class="col-2">
+                    <img src="assets/images/liston.png" alt="AJPI" class="liston">
+                </div>
+                <div class="col-8">
+                    <div class="col-12">
+                        <div class="mat-display-1 mb-10">ASOCIACIÓN JUJEÑA DE PROFESORES DE INGLÉS</div>
+                        <h1>PERSONERÍA JURÍDICA N° 1102/92</h1>
+                    </div>
+                    <div class="col-12">
+                        <div class="mat-display-1 mb-0">{{socio.nombre}} {{socio.apellido}}</div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <ngx-qrcode 
+                        [elementType]="elementType" 
+                        [value]="value"
+                        errorCorrectionLevel="L">
+                    </ngx-qrcode>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p>con DNI {{socio.dni}}, con título habilitante de Profesor de Inglés, pertenece a esta asociación en calidad de socio activo desde {{socio.fecha_registro | date: 'dd/MM/YYYY'}}</p>
+                </div>
+                <div class="col-12">
+                    <p>Completo el curso: {{curso.curso}}</p>
+                    <p>Con fecha: {{curso.fecha | date: 'dd/MM/YYYY'}}</p>
+                    <p>Con resolución: {{curso.resolucion}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p>FIRMA DIGITAL</p>
+                    <h3 class="bold">Mgter. Marcela Burgos Pawlak</h3>
+                    <h6>Presidente</h6>
+                    <h6>Comisión directiva 2018-2020</h6>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h6 class="bold">Emitido el {{fecha | date: 'dd/MM/YYYY'}}</h6>
+                <h6>Este documento digital o impreso es válido como certificado de membresía para ser presentado ante las autoridades que lo requieran.</h6>
+                <h6>Para más información y contacto ingrese en: https://www.facebook.com/ajpi.inglesjujuy</h6>
+            </div>
+            <div class="col-6"></div>
+        </div>
+    </div>
+    <button mat-raised-button class="right" color="primary" (click)="downloadPDF()">Descargar PDF</button>
+</mat-dialog-content>

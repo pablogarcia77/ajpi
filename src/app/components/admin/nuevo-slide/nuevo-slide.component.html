@@ -1,0 +1,23 @@
+<div class="row mt-5">
+    <div class="col-10">
+        <h1>Nueva Imagen</h1>
+    </div>
+</div>
+<div class="row">
+    <form [formGroup]="slideForm" #form (submit)="nuevoSlide()">
+        <div class="col-12">
+            <mat-label>Subir Imagen</mat-label>
+            <button type="button" mat-raised-button color="primary" class="w-100" (click)="imagen.click()">Subir Imagen</button>
+            <mat-progress-bar color="primary"
+            mode="determinate"
+            [value]="progress"></mat-progress-bar>
+            <input hidden type="file" #imagen mat-raised-button accept="image/*" (change)="readThis($event)">
+        </div>
+        <div class="col-12" *ngIf="slide.slide">
+            <img [src]="slide.slide" alt="Slide" class="preview">
+        </div>
+        <div class="col-12">
+            <button mat-raised-button color="primary" type="submit" class="right">Confirmar</button>
+        </div>
+    </form>
+</div>
