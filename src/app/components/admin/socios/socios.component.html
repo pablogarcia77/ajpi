@@ -5,13 +5,19 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <div class="col-6">
+    <div class="col-3">
       <mat-form-field>
         <mat-label>Busqueda</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Juan Perez" #input>
       </mat-form-field>
     </div>
-    <div class="col-6">
+    <div class="col-3">
+      <button mat-raised-button color="primary" class="right" (click)="nuevoSocio()">Nuevo Socio</button>
+    </div>
+    <div class="col-3">
+      <button mat-raised-button color="primary" class="right" (click)="updateTable()">Actualizar Tabla</button>
+    </div>
+    <div class="col-3">
       <button mat-raised-button color="primary" class="right" (click)="generateReport()">Generar Reporte</button>
     </div>
   </div>

@@ -1,19 +1,22 @@
 <h2 mat-dialog-title>Reporte de Socios</h2>
 <mat-dialog-content>
     <div>
-        <table id="htmlData" #htmlData>
+        <table id="tabla">
             <thead>
-                <th>Apellido</th>
-                <th>Nombre</th>
-                <th *ngFor="let periodo of periodos">{{ periodo.periodo }}</th>
+                <tr>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th *ngFor="let periodo of periodos">{{ periodo.periodo }}</th>
+                </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let socio of cuotaSocios">
                     <td>{{ socio.apellido }}</td>
                     <td>{{ socio.nombre }}</td>
                     <td *ngFor="let p of periodos" class="center">
-                        <span *ngFor="let c of socio.periodos; let index">
-                            <span *ngIf="c == p.periodo" [ngClass]="{'pago': c == p.periodo}">Pago</span>
+                        <span *ngFor="let c of socio.deuda; let index">
+                            <span *ngIf="c.periodo == p.periodo && c.deuda == 0" [ngClass]="{'pago': c.periodo == p.periodo}">Pago</span>
+                            <span *ngIf="c.periodo == p.periodo && c.deuda != 0" [ngClass]="{'debe': c.periodo == p.periodo}">{{c.deuda}}</span>
                         </span>
                     </td>
                 </tr>

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Periodo } from 'src/app/interfaces/periodo';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -21,6 +21,10 @@ export class CuotasComponent implements OnInit {
 
   public muestraPago: boolean=false;
 
+  public muestraDeuda: boolean=false;
+
+  public deuda: number = 0;
+
   public selectedList: any;
 
   constructor(
@@ -28,7 +32,8 @@ export class CuotasComponent implements OnInit {
     public data: {socio: Usuario},
     private cuotasService: CuotasService,
     private periodosService: PeriodosService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     this.socio = new Usuario()
     this.socio = this.data.socio
@@ -49,6 +54,11 @@ export class CuotasComponent implements OnInit {
     this.muestraPago=true
   }
 
+  nuevaDeuda(){
+    this.muestraDeuda=true
+    this.selectedList = null
+  }
+
   cargarCuotasPagadas(){
     this.cuotasService.getCuotasPagadas(this.socio).subscribe(
       response => {
@@ -60,12 +70,36 @@ export class CuotasComponent implements OnInit {
   pagar(){
     this.muestraPago=false
     // console.log(this.selectedList)
-    this.cuotasService.pagarCuotas(this.selectedList,this.socio).subscribe(
+    this.cuotasService.pagarCuotas(this.selectedList,this.socio,0).subscribe(
       response => {
+        // console.log(response)
         if(response){
           this.snackBar.open('Cuota agregada correctamente','Aceptar',{duration:1500})
         }
         this.cargarCuotasPagadas()
+      }
+    )
+  }
+
+  cargarDeuda(){
+    this.muestraDeuda=false
+    this.cuotasService.pagarCuotas(this.selectedList,this.socio,this.deuda).subscribe(
+      response => {
+        // console.log(response)
+        if(response){
+          this.snackBar.open('Deuda agregada correctamente','Aceptar',{duration:1500})
+        }
+        this.cargarCuotasPagadas()
+      }
+    )
+    this.selectedList = null
+  }
+
+  deletePago(id: number){
+    this.cuotasService.deleteCuotasPagadas(id).subscribe(
+      () => {
+        this.snackBar.open('Pago eliminado','Aceptar',{duration: 1500})
+        this.dialog.closeAll()
       }
     )
   }

@@ -20,7 +20,7 @@
     if (!isset($_GET['id'])){
       if(!isset($_GET['pagadas'])){
         //Mostrar todos los usuarios
-        $sql = $dbConn->prepare("SELECT cp.id,c.periodo FROM cuotas_pagadas cp, cuotas c WHERE cp.periodo=c.id");
+        $sql = $dbConn->prepare("SELECT cp.id,c.periodo,cp.deuda FROM cuotas_pagadas cp, cuotas c WHERE cp.periodo=c.id");
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_ASSOC);
         header("HTTP/1.1 200 OK");
@@ -31,7 +31,7 @@
         $queryPeriodos->setFetchMode(PDO::FETCH_ASSOC);
         $periodos = $queryPeriodos->fetchAll();
 
-        $sql = $dbConn->prepare("SELECT u.username,u.apellido,u.nombre,p.periodo FROM wp_users u LEFT JOIN cuotas_pagadas cp ON u.id=cp.socio LEFT JOIN cuotas p ON p.id=cp.periodo ORDER BY u.apellido ASC");
+        $sql = $dbConn->prepare("SELECT u.username,u.apellido,u.nombre,p.periodo,cp.deuda FROM wp_users u LEFT JOIN cuotas_pagadas cp ON u.id=cp.socio LEFT JOIN cuotas p ON p.id=cp.periodo WHERE u.username != 'ajpi' ORDER BY u.apellido ASC");
         $sql->execute();
         $sql->setFetchMode(PDO::FETCH_ASSOC);
         $array = $sql->fetchAll();
@@ -42,10 +42,15 @@
           $response['apellido'] = $socio['apellido'];
           $response['nombre'] = $socio['nombre'];
 
-          $response['periodos'] = array();
+          // $response['periodos'] = array();
+          $response['deuda'] = array();
           foreach($array as $iter){
+            $obj=[];
             if($iter['username'] == $response['socio']){
-              array_push($response['periodos'],$iter['periodo']);
+              // array_push($response['periodos'],$iter['periodo']);
+              $obj['periodo'] = $iter['periodo'];
+              $obj['deuda'] = $iter['deuda'];
+              array_push($response['deuda'],$obj);
             }
           }
           array_push($respuesta,$response);
@@ -56,7 +61,7 @@
       exit();
     }else {
       //Mostrar un usuario especifico
-      $sql = $dbConn->prepare("SELECT cp.id,c.periodo FROM cuotas_pagadas cp, cuotas c, wp_users u WHERE cp.periodo=c.id AND u.id=cp.socio AND u.id=:id");
+      $sql = $dbConn->prepare("SELECT cp.id,c.periodo,cp.deuda FROM cuotas_pagadas cp, cuotas c, wp_users u WHERE cp.periodo=c.id AND u.id=cp.socio AND u.id=:id");
       $sql->bindValue(':id', $_GET['id']);
       $sql->execute();
       $sql->setFetchMode(PDO::FETCH_ASSOC);
@@ -72,16 +77,22 @@
     $cadena = '';
     $socio = $array['socio'];
     foreach ($array['cuotas'] as $key => $value) {
-      $cadena.='('.$socio.','.$value.'),';
+      $cadena.='('.$socio.','.$value.','.$array['deuda'].'),';
     }
     $cadena = substr($cadena,0,-1);
     $sql = "INSERT INTO cuotas_pagadas
-          (socio,periodo)
+          (socio,periodo,deuda)
           VALUES
           ".$cadena."";
-    $statement = $dbConn->prepare($sql);
+    
+    try{
+      $statement = $dbConn->prepare($sql);
     bindAllValues($statement, $input);
-    $statement->execute();
+      $statement->execute();
+    }catch(PDOException $e){
+      header("HTTP/1.1 200 OK");
+      echo json_encode($e->getMessage());
+    }
     $userId = $dbConn->lastInsertId();
     if($userId){
       $input['id'] = $userId;
@@ -95,10 +106,8 @@
   if ($_SERVER['REQUEST_METHOD'] == 'DELETE')
   {
     $id = $_GET['id'];
-    $estado = $_GET['estado'];
-    $statement = $dbConn->prepare("UPDATE usuario SET estado=:estado WHERE id=:id");
+    $statement = $dbConn->prepare("DELETE FROM cuotas_pagadas  WHERE id=:id");
     $statement->bindValue(':id', $id);
-    $statement->bindValue(':estado', $estado);
     $statement->execute();
     header("HTTP/1.1 200 OK");
     exit();

@@ -7,7 +7,10 @@ th{
     color: green;
     font-weight: bolder;
 }
-
+.debe{
+    color: red;
+    font-weight: bolder;
+}
 tr:nth-of-type(odd){
     background-color: #e9e9e9;
 }

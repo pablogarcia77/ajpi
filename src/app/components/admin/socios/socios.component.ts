@@ -11,6 +11,7 @@ import { VerTituloComponent } from '../ver-titulo/ver-titulo.component';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ReporteComponent } from '../reporte/reporte.component';
+import { RegistroComponent } from '../../layout/registro/registro.component';
 
 @Component({
   selector: 'app-socios',
@@ -38,6 +39,10 @@ export class SociosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.updateTable()
+  }
+
+  updateTable(){
     this.usuariosService.getUsuarios().subscribe(
       response => {
         // console.log(response)
@@ -109,6 +114,12 @@ export class SociosComponent implements OnInit {
       {
         width: '100%'
       }
+    )
+  }
+
+  nuevoSocio(){
+    this.dialog.open(
+      RegistroComponent
     )
   }
 }

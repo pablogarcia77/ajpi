@@ -1,7 +1,7 @@
-<div *ngIf="!muestraPago">
+<div *ngIf="!muestraPago && !muestraDeuda">
     <div class="row">
         <div class="col-12">
-            <h1>Cuotas abonadas</h1>
+            <h1>Cuotas abonadas/adeudadas</h1>
         </div>
     </div>
     <div class="row">
@@ -12,10 +12,25 @@
     <div class="row">
         <h2 *ngIf="cuotasPagadas.length == 0">No tiene cuotas pagadas</h2>
         <div class="col-12" *ngIf="cuotasPagadas.length != 0">
-            <p *ngFor="let cuotaPagada of cuotasPagadas">Período: {{cuotaPagada.periodo}}</p>
+            <div *ngFor="let cuotaPagada of cuotasPagadas">
+                <div class="col-8">
+                    <div class="col-6">
+                        <p>Período: {{cuotaPagada.periodo}}</p>
+                    </div>
+                    <div class="col-6">
+                        <p>Deuda: {{cuotaPagada.deuda}}</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <mat-icon color="primary" class="cursor mt-1" (click)="deletePago(cuotaPagada.id)">close</mat-icon>
+                </div>
+            </div>
         </div>
-        <div class="col-12">
+        <div class="col-6">
             <button mat-raised-button color="primary" (click)="nuevoPago()">Nuevo Pago</button>
+        </div>
+        <div class="col-6">
+            <button mat-raised-button color="primary" (click)="nuevaDeuda()">Nueva Deuda</button>
         </div>
     </div>
 </div>
@@ -36,6 +51,33 @@
         </div>
         <div class="col-12">
             <button mat-raised-button color="primary" class="w-100" (click)="pagar()">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="muestraDeuda">
+    <div class="row">
+        <div class="col-12">
+            <h1>Nueva Deuda</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Periodo</mat-label>
+                <mat-select multiple [(ngModel)]="selectedList">
+                  <mat-option *ngFor="let periodo of periodos" [value]="periodo.id">{{periodo.periodo}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-12">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Importe</mat-label>
+                <input matInput type="number" [(ngModel)]="deuda">
+            </mat-form-field>
+        </div>
+        <div class="col-12">
+            <button mat-raised-button color="primary" class="w-100" (click)="cargarDeuda()">Confirmar</button>
         </div>
     </div>
 </div>

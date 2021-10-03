@@ -33,13 +33,18 @@ export class CuotasService {
     return this.http.get(this.urlBase + '?pagadas')
   }
 
-  pagarCuotas(cuotas: any,usuario: Usuario):Observable<any>{
+  pagarCuotas(cuotas: any,usuario: Usuario,deuda: any):Observable<any>{
     let obj = {
       socio: usuario.id,
-      cuotas: cuotas
+      cuotas: cuotas,
+      deuda: deuda
     }
     const newSession = Object.assign({},obj);
     // console.log(newSession)
     return this.http.post(this.urlBase,newSession,cudOptions)
+  }
+
+  deleteCuotasPagadas(cuota: any):Observable<any>{
+    return this.http.delete(this.urlBase + '?id=' + cuota)
   }
 }
